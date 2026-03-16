@@ -1,7 +1,6 @@
 import { APIRequestContext } from '@playwright/test'
 
 export class ApiClient {
-
     constructor(private request: APIRequestContext) {}
 
     async get(endpoint: string) {
@@ -23,5 +22,4 @@ export class ApiClient {
     async delete(endpoint: string) {
         return await this.request.delete(endpoint)
     }
-
 }
