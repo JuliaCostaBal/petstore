@@ -31,7 +31,7 @@ test.describe('Pet creation flow', () => {
                 soldPetId = body.id;
             }
         }
-    })
+    });
 
     test('Get details of pet with status sold', async ({ request }) => {
         const client = new ApiClient(request);
@@ -43,5 +43,5 @@ test.describe('Pet creation flow', () => {
 
         expect(body.id).toBe(soldPetId);
         expect(body.status).toBe('sold');
-    })
+    });
 })
