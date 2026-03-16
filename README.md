@@ -95,3 +95,10 @@ npx playwright show-report
 ## Notes
 
 The Petstore API is a public shared service. Test results may occasionally be affected by external data created by other users.
+
+---
+
+## Author
+
+Julia Costa,
+QA Automation Engineer
