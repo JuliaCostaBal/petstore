@@ -2,7 +2,6 @@ import { ApiClient } from '../api/apiClient'
 import {Pet} from "../models/pet";
 
 export class PetService {
-
     constructor(private client: ApiClient) {}
 
     async createPet(pet: Pet) {
@@ -16,5 +15,4 @@ export class PetService {
     async findByStatus(status: string) {
         return await this.client.get(`/v2/pet/findByStatus?status=${status}`)
     }
-
 }

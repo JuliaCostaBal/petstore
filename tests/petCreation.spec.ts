@@ -1,15 +1,10 @@
-import { test, expect } from '@playwright/test'
-import { ApiClient } from '../src/api/apiClient'
-import { PetService } from '../src/services/petService'
+import { test, expect } from '../src/fixtures/apiFixtures'
 import { generatePet } from '../src/utils/dataGenerator'
 
 let soldPetId: number;
 
 test.describe('Pet creation flow', () => {
-    test('Create pets with different statuses', async ({ request }) => {
-        const client = new ApiClient(request);
-        const petService = new PetService(client);
-
+    test('Create pets with different statuses', async ({ petService }) => {
         const statuses = [
             ...Array(5).fill('available'),
             ...Array(4).fill('pending'),
@@ -33,9 +28,7 @@ test.describe('Pet creation flow', () => {
         }
     });
 
-    test('Get details of pet with status sold', async ({ request }) => {
-        const client = new ApiClient(request);
-        const petService = new PetService(client);
+    test('Get details of pet with status sold', async ({ petService }) => {
         const response = await petService.getPetById(soldPetId);
 
         expect(response.status()).toBe(200);
