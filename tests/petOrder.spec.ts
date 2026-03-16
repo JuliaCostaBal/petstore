@@ -4,6 +4,7 @@ import {generateOrder} from "../src/utils/dataGenerator";
 let selectedPets: any[] = []
 
 test.describe('Pet order flow', () => {
+
     test.beforeAll(async ({ petService }) => {
         const response = await petService.findByStatus('available');
         const pets = await response.json();
@@ -25,8 +26,10 @@ test.describe('Pet order flow', () => {
             const response = await storeService.createOrder(order);
 
             expect(response.status()).toBe(200);
-            const body = await response.json();
+            expect(response.headers()['content-type']).toContain('application/json');
 
+            const body = await response.json();
+            expect(body).toHaveProperty('petId');
             expect(body.petId).toBe(pet.id);
             expect(body.status).toBe('placed');
         }

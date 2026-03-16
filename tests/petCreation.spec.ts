@@ -4,6 +4,7 @@ import { generatePet } from '../src/utils/dataGenerator'
 let soldPetId: number;
 
 test.describe('Pet creation flow', () => {
+
     test('Create pets with different statuses', async ({ petService }) => {
         const statuses = [
             ...Array(5).fill('available'),
@@ -15,11 +16,12 @@ test.describe('Pet creation flow', () => {
             const pet = generatePet(status);
             const response = await petService.createPet(pet);
 
-            console.log(await response.text());
-
             expect(response.status()).toBe(200);
+            expect(response.headers()['content-type']).toContain('application/json');
+
             const body = await response.json();
             expect(body).toHaveProperty('id');
+            expect(body.name).toBe(pet.name);
             expect(body.status).toBe(status);
 
             if (status === 'sold') {
